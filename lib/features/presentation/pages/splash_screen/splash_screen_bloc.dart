@@ -23,7 +23,7 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
   Stream<SplashScreenState> mapEventToState(
     SplashScreenEvent event,
   ) async* {
-    if (event is SplashScreenEvent) {
+    if (event is apiScreenEventOne) {
       yield ApiLoadingState();
       final data = await _apiUseCase.call(NoParams());
       yield* data.fold((failure) async* {
@@ -36,7 +36,37 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
         }
       }, (loadedDataEntity) async* {
         print("ffffffffffffff");
-        yield ApiScreenLoadedState(apiEntity: loadedDataEntity);
+        yield ApiScreenLoadedState(apiEntity1: loadedDataEntity);
+      });
+    }else if (event is apiScreenEventTwo) {
+      yield ApiLoadingState();
+      final data = await _apiUseCase.call(NoParams());
+      yield* data.fold((failure) async* {
+        if (failure is CacheFailure) {
+          yield ApiScreenErrorState(message: failure.message);
+        } else if (failure is ServerFailure) {
+          yield ApiScreenErrorState(message: failure.message);
+        } else {
+          yield ApiScreenErrorState(message: Constants.ERROR_UNKNOWN);
+        }
+      }, (loadedDataEntity) async* {
+        print("ffffffffffffff");
+        yield ApiScreenLoadedState(apiEntity2: loadedDataEntity);
+      });
+    }else if (event is apiScreenEventThree) {
+      yield ApiLoadingState();
+      final data = await _apiUseCase.call(NoParams());
+      yield* data.fold((failure) async* {
+        if (failure is CacheFailure) {
+          yield ApiScreenErrorState(message: failure.message);
+        } else if (failure is ServerFailure) {
+          yield ApiScreenErrorState(message: failure.message);
+        } else {
+          yield ApiScreenErrorState(message: Constants.ERROR_UNKNOWN);
+        }
+      }, (loadedDataEntity) async* {
+        print("ffffffffffffff");
+        yield ApiScreenLoadedState(apiEntity3: loadedDataEntity);
       });
     }
   }

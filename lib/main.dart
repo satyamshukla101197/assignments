@@ -6,7 +6,6 @@ import 'package:supdup/features/presentation/pages/splash_screen/splash_screen.d
 
 import 'core/utils/constants.dart';
 import 'core/utils/routes.dart';
-import 'features/presentation/pages/second_screen/second_screen.dart';
 import 'features/presentation/pages/splash_screen/splash_screen_bloc.dart';
 import 'injection_container.dart' as di;
 import 'injection_container.dart';
@@ -49,7 +48,6 @@ class MyApp extends StatelessWidget {
     return <String, WidgetBuilder>{
       AppRoutes.splash: (context) => BlocProvider<SplashScreenBloc>(
           create: (context) => sl<SplashScreenBloc>(), child: SplashScreen()),
-      AppRoutes.second_screen: (context) => SecondScreen(),
     };
   }
 }
